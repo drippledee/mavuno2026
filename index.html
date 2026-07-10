@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAVUNO Fundraiser 2026</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f4f7f5;
+            color: #2d3748;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #1b4332; /* Deep Forest Green */
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            color: #b7e4c7;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            color: #ffffff;
+        }
+
+        .hero {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(rgba(27, 67, 50, 0.08), rgba(27, 67, 50, 0.03));
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            color: #1b4332;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #4a5568;
+            max-width: 650px;
+            margin: 0 auto 40px auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 6px;
+            background-color: #2d6a4f;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #1b4332;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background-color: #1b4332;
+            color: #b7e4c7;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+        /* ==========================================================================
+           Event Info Grid Styling
+           ========================================================================== */
+        .info-grid {
+            max-width: 1200px;
+            margin: 40px auto 80px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 0 20px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border-top: 4px solid #2d6a4f;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: #1b4332;
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            color: #4a5568;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .card p strong {
+            color: #2d6a4f;
+            font-size: 1.2rem;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        /* ==========================================================================
+           1. Raffle Explainer & Prizes Section Styling
+           ========================================================================== */
+        .raffle-explainer-container {
+            max-width: 1200px;
+            margin: 0 auto 50px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .explainer-text-box, .prizes-box {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            flex: 1;
+            min-width: 320px;
+            border-top: 4px solid #40916c;
+        }
+
+        .explainer-text-box h2, .prizes-box h2 {
+            color: #1b4332;
+            margin-bottom: 15px;
+        }
+
+        .explainer-text-box h3 {
+            color: #2d6a4f;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .explainer-steps {
+            list-style: none;
+            padding: 0;
+        }
+
+        .explainer-steps li {
+            margin-bottom: 15px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .prize-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .prize-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background-color: #f8fafc;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .prize-badge {
+            background-color: #1b4332;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+            padding: 6px 12px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .prize-badge.runner-up {
+            background-color: #4a5568;
+        }
+
+        .prize-details h4 {
+            color: #2d3748;
+            margin-bottom: 2px;
+            font-size: 1.1rem;
+        }
+
+        .prize-details p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* ==========================================================================
+           2. Registration & Ticket Portal Layout
+           ========================================================================== */
+        .portal-container {
+            max-width: 1200px;
+            margin: 0 auto 80px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .portal-form-box, .raffle-box {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            flex: 1;
+            min-width: 320px;
+        }
+
+        .portal-form-box h2, .raffle-box h2 {
+            color: #1b4332;
+            margin-bottom: 10px;
+        }
+
+        .portal-form-box p, .raffle-box p {
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        form input, form select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .btn-submit {
+            background-color: #2d6a4f;
+            color: white;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            font-weight: 600;
+            padding: 14px;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #1b4332;
+        }
+
+        /* Ticket Cards */
+        .ticket-cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .ticket-card {
+            position: relative;
+            border: 2px dashed #e2e8f0;
+            padding: 25px;
+            border-radius: 8px;
+            background-color: #f8fafc;
+            overflow: hidden;
+        }
+
+        .ticket-tag {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .student-tkt .ticket-tag { background-color: #e8f5e9; color: #2e7d32; }
+        .alumni-tkt .ticket-tag { background-color: #e3f2fd; color: #1565c0; }
+        .community-tkt .ticket-tag { background-color: #fff3e0; color: #ef6c00; }
+
+        .ticket-card h3 { margin-bottom: 5px; color: #2d3748; }
+        .ticket-card .price { font-size: 1.5rem; font-weight: bold; color: #2d6a4f; margin-bottom: 10px; }
+        .ticket-card p { margin-bottom: 15px; font-size: 0.95rem; }
+
+        .btn-buy {
+            background-color: transparent;
+            border: 2px solid #2d6a4f;
+            color: #2d6a4f;
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-buy:hover {
+            background-color: #2d6a4f;
+            color: white;
+        }
+
+        /* Modal Pop-up Shadow */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+            text-align: center;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .close-btn:hover { color: #333; }
+
+        .till-box {
+            background-color: #f1f8f5;
+            border: 2px solid #2d6a4f;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .till-box h2 { color: #2d6a4f; font-size: 2rem; margin: 5px 0; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">MAVUNO 2026</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Tickets</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Harvesting Hope Together 🌾</h1>
+            <p>Join us as we raise funds for community projects and celebrate unity through faith and fun.</p>
+            <a href="#" class="btn">Get Tickets</a>
+        </div>
+    </section>
+    <section class="info-grid">
+        <div class="card">
+            <h3>📅 Event Date</h3>
+            <p><strong>November 7, 2026</strong></p>
+            <p>Mark your calendars for an unforgettable day!</p>
+        </div>
+        <div class="card">
+            <h3>📍 Location</h3>
+            <p><strong>Upper Kabete Campus</strong></p>
+            <p>Join us physically or connect with us online.</p>
+        </div>
+        <div class="card">
+            <h3>🎯 Our Target Goal</h3>
+            <p><strong>350,000 KES</strong></p>
+            <p>Every contribution brings community projects to life.</p>
+        </div>
+    </section>
+    <section class="raffle-explainer-container">
+        
+        <div class="explainer-text-box">
+            <h2>🎟️ What is the MAVUNO Raffle?</h2>
+            <p>The MAVUNO Raffle is an exciting initiative to support our annual student fundraiser. 100% of the proceeds from your ticket purchases go directly toward funding community impact projects, supporting student welfare, and driving local outreach initiatives.</p>
+            
+            <h3>How It Works:</h3>
+            <ul class="explainer-steps">
+                <li><strong>1. Choose Your Edition:</strong> Pick the ticket tier that matches your status (Student, Alumni, or Supporter).</li>
+                <li><strong>2. Secure via M-Pesa:</strong> Click 'Buy Ticket' and complete your payment to our secure Till Number.</li>
+                <li><strong>3. Get Verified:</strong> Keep your transaction code. Once verified, your official ticket number is locked into the draw.</li>
+                <li><strong>4. The Grand Draw:</strong> Winners will be picked randomly during our main event on <strong>November 7, 2026</strong>!</li>
+            </ul>
+        </div>
+
+        <div class="prizes-box">
+            <h2>🎁 Grand Prizes to be Won!</h2>
+            <p>We have lined up incredible rewards to appreciate your generosity. Here's a glimpse of what you could walk away with:</p>
+            
+            <div class="prize-list">
+                <div class="prize-item">
+                    <span class="prize-badge">1st Prize</span>
+                    <div class="prize-details">
+                        <h4>📱 Brand New Smartphone</h4>
+                        <p>The ultimate tech upgrade to keep you connected in style.</p>
+                    </div>
+                </div>
+                
+                <div class="prize-item">
+                    <span class="prize-badge">2nd Prize</span>
+                    <div class="prize-details">
+                        <h4>🎧 Premium Wireless Headphones</h4>
+                        <p>High-fidelity sound and noise cancellation for school or travel.</p>
+                    </div>
+                </div>
+
+                <div class="prize-item">
+                    <span class="prize-badge">3rd Prize</span>
+                    <div class="prize-details">
+                        <h4>🛍️ 10,000 KES Shopping Voucher</h4>
+                        <p>Fully loaded voucher redeemable at major retail outlets.</p>
+                    </div>
+                </div>
+
+                <div class="prize-item hampers">
+                    <span class="prize-badge runner-up">Runner Up</span>
+                    <div class="prize-details">
+                        <h4>🧺 Custom Gift Hampers</h4>
+                        <p>5 lucky winners will receive gift bags packed with goodies and official merchandise.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section class="portal-container">
+        
+        <div class="portal-form-box">
+            <h2>📝 Registration Portal</h2>
+            <p>Register your details below to confirm your attendance.</p>
+            
+            <form id="registrationForm" onsubmit="event.preventDefault();">
+                <label for="role">Select Your Category:</label>
+                <select id="role" onchange="toggleFormFields()">
+                    <option value="student">Current Student</option>
+                    <option value="alumni">Alumni</option>
+                    <option value="guest">Guest / Supporter</option>
+                </select>
+
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" placeholder="Enter your full name" required>
+
+                <div id="dynamicField">
+                    <label for="regNumber">Registration Number:</label>
+                    <input type="text" id="regNumber" placeholder="e.g., A123/4567/2024" required>
+                </div>
+
+                <label for="phoneNumber">Phone Number (M-Pesa):</label>
+                <input type="tel" id="phoneNumber" placeholder="e.g., 0712345678" required>
+
+                <button type="submit" class="btn btn-submit" onclick="alert('Registration details saved locally!')">Submit Registration</button>
+            </form>
+        </div>
+
+        <div class="raffle-box">
+            <h2>🎟️ MAVUNO Raffle Tickets</h2>
+            <p>Support our fundraiser by purchasing a raffle ticket. Pick your edition!</p>
+            
+            <div class="ticket-cards-container">
+                <div class="ticket-card student-tkt">
+                    <div class="ticket-tag">Student Edition</div>
+                    <h3>🌾 Class Ticket</h3>
+                    <p class="price">50 KES</p>
+                    <p>Exclusive for current students. Great prizes to be won!</p>
+                    <button class="btn btn-buy" onclick="openPaymentModal('Student Edition', '50')">Buy Ticket</button>
+                </div>
+
+                <div class="ticket-card alumni-tkt">
+                    <div class="ticket-tag">Alumni Edition</div>
+                    <h3>🎓 Legacy Ticket</h3>
+                    <p class="price">200 KES</p>
+                    <p>For our esteemed alumni returning to support the roots.</p>
+                    <button class="btn btn-buy" onclick="openPaymentModal('Alumni Edition', '200')">Buy Ticket</button>
+                </div>
+
+                <div class="ticket-card community-tkt">
+                    <div class="ticket-tag">Community Supporter</div>
+                    <h3>🤝 Harambee Ticket</h3>
+                    <p class="price">500 KES</p>
+                    <p>For pillars of the community and external well-wishers.</p>
+                    <button class="btn btn-buy" onclick="openPaymentModal('Community Supporter', '500')">Buy Ticket</button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h3 id="modalTicketTitle">Buy Raffle Ticket</h3>
+            <p>To purchase, please use the M-Pesa Till details below:</p>
+            
+            <div class="till-box">
+                <p>Buy Goods Till Number:</p>
+                <h2>💥 123 456 789</h2>
+                <p>Amount: <strong id="modalTicketPrice">0</strong> KES</p>
+            </div>
+            
+            <p style="font-size: 0.9rem; color: #666; margin-top: 15px;">
+                After paying, wait for verification. Your digital raffle ticket will be sent upon confirmation.
+            </p>
+            <button class="btn btn-submit" style="margin-top: 15px; width: 100%;" onclick="alert('Payment submitted for verification!')">I Have Paid</button>
+        </div>
+    </div>
+    <script>
+        // 1. Changes form inputs depending on who is registering
+        function toggleFormFields() {
+            const role = document.getElementById('role').value;
+            const dynamicField = document.getElementById('dynamicField');
+            
+            if (role === 'student') {
+                dynamicField.innerHTML = `
+                    <label for="regNumber">Registration Number:</label>
+                    <input type="text" id="regNumber" placeholder="e.g., A123/4567/2024" required>
+                `;
+            } else if (role === 'alumni') {
+                dynamicField.innerHTML = `
+                    <label for="regNumber">Year of Graduation / Exit:</label>
+                    <input type="text" id="regNumber" placeholder="e.g., Class of 2024" required>
+                `;
+            } else {
+                // If it's a Guest, completely remove the tracking box
+                dynamicField.innerHTML = '';
+            }
+        }
+
+        // 2. Control Modal Windows for Mpesa checkout
+        function openPaymentModal(ticketName, price) {
+            document.getElementById('modalTicketTitle').innerText = `Buy ${ticketName}`;
+            document.getElementById('modalTicketPrice').innerText = price;
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        // Close window if user clicks background shadow
+        window.onclick = function(event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+
+    <footer>
+        <p>&copy; 2026 Saint Raphael's Students Community | MAVUNO Project</p>
+    </footer>
+
+</body>
+</html>
