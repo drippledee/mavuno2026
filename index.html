@@ -66,10 +66,10 @@
             justify-content: center;
             text-align: center;
             padding: 100px 20px;
+            position: relative;
             background: linear-gradient(135deg, #fff9e6 0%, #e8f5e9 100%);
-            background-size : 400% 400%;
-            animation : gradientMove 15s ease infinite;
-        }
+}
+        
         @keyframes gradientMove {
     0% {
         background-position: 0% 50%;
@@ -424,6 +424,7 @@
     </header>
 
     <section class="hero">
+        <div class="falling-container" id="fallingContainer"></div>
         <div class="hero-content">
             <h1>Harvesting Hope Together 🌾</h1>
             <p>Join us as we raise funds for community projects and celebrate unity through faith and fun.</p>
@@ -626,7 +627,30 @@
 
     <footer>
         <p>&copy; 2026 Saint Raphael's Students Community | MAVUNO Project</p>
-    </footer>
+    </footer><script>
+    const container = document.getElementById('fallingContainer');
+    const symbols = ['🍂', '🍁', '🍃']; 
+
+    function createLeaf() {
+        const leaf = document.createElement('div');
+        leaf.classList.add('leaf');
+        leaf.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+        leaf.style.left = Math.random() * 100 + '%';
+        
+        const duration = Math.random() * 6 + 6;
+        leaf.style.animationDuration = duration + 's';
+        leaf.style.fontSize = Math.random() * 15 + 15 + 'px';
+        
+        container.appendChild(leaf);
+        
+        setTimeout(() => {
+            leaf.remove();
+        }, duration * 1000);
+    }
+
+    setInterval(createLeaf, 800);
+</script>
+
 
 </body>
 </html>
