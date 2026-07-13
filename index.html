@@ -69,18 +69,48 @@
             position: relative;
             background: linear-gradient(135deg, #fff9e6 0%, #e8f5e9 100%);
 }
-        
-        @keyframes gradientMove {
+/* Container for the falling objects */
+.falling-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1; /* Keeps them behind your text and buttons */
+    pointer-events: none; /* Makes sure you can still click your buttons */
+}
+
+/* Individual falling object style */
+.leaf {
+    position: absolute;
+    display: block;
+    font-size: 24px; /* Size of the objects */
+    user-select: none;
+    pointer-events: none;
+    animation: fall linear infinite;
+}
+
+/* The physics engine: falling down while gently swaying left to right */
+@keyframes fall {
     0% {
-        background-position: 0% 50%;
+        top: -10%;
+        transform: translateX(0) rotate(0deg);
+        opacity: 0;
     }
-    50% {
-        background-position: 100% 50%;
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
     }
     100% {
-        background-position: 0% 50%;
+        top: 110%;
+        transform: translateX(100px) rotate(360deg);
+        opacity: 0;
     }
 }
+
 
         .hero-content h1 {
             font-size: 3rem;
@@ -130,7 +160,51 @@
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
             padding: 0 20px;
-        }
+        }/* Countdown Timer Section Style */
+.countdown-container {
+    text-align: center;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.countdown-container h2 {
+    color: #2d6a4f; /* Matches your card top border green */
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.countdown-display {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.time-box {
+    background-color: #ffffff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    min-width: 80px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e8f5e9;
+    text-align: center;
+}
+
+.time-box span {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #2d6a4f;
+}
+
+.time-box small {
+    color: #666;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    display: block;
+    margin-top: 5px;
+}
+
 
         .card {
             background-color: #ffffff;
@@ -413,7 +487,7 @@
 
     <header>
         <div class="nav-container">
-            <div class="logo">MAVUNO 2026</div>
+            <div class="logo">UPPER KABETE CAMPUS MAVUNO FUNDRAISER 2026</div>
             <nav>
                 <ul>
                     <li><a href="#">Home</a></li>
@@ -425,6 +499,7 @@
 
     <section class="hero">
         <div class="falling-container" id="fallingContainer"></div>
+
         <div class="hero-content">
             <h1>Harvesting Hope Together 🌾</h1>
             <p>Join us as we raise funds for community projects and celebrate unity through faith and fun.</p>
@@ -448,6 +523,28 @@
             <p>Every contribution brings community projects to life.</p>
         </div>
     </section>
+    <!-- Countdown Display Layout -->
+<div class="countdown-container">
+    <h2>Mavuno Countdown 🌾</h2>
+    <div class="countdown-display">
+        <div class="time-box">
+            <span id="days">00</span>
+            <small>Days</small>
+        </div>
+        <div class="time-box">
+            <span id="hours">00</span>
+            <small>Hours</small>
+        </div>
+        <div class="time-box">
+            <span id="minutes">00</span>
+            <small>Minutes</small>
+        </div>
+        <div class="time-box">
+            <span id="seconds">00</span>
+            <small>Seconds</small>
+        </div>
+    </div>
+</div>
     <section class="raffle-explainer-container" id="raffle-hub">
         
         <div class="explainer-text-box">
@@ -651,6 +748,33 @@
     setInterval(createLeaf, 800);
 </script>
 
+<script>
+    // Target Event Date: November 7, 2026
+    const targetDate = new Date("Nov 7, 2026 00:00:00").getTime();
+
+    const updateTimer = setInterval(function() {
+        const now = new Date().getTime();
+        const difference = targetDate - now;
+
+        // Calculations for days, hours, minutes, and seconds
+        const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+        // Update HTML elements with clean leading zeros
+        document.getElementById("days").innerText = d < 10 ? "0" + d : d;
+        document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
+        document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
+        document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
+
+        // Message when the countdown completes
+        if (difference < 0) {
+            clearInterval(updateTimer);
+            document.querySelector(".countdown-display").innerHTML = "<h3>The Event Has Started! 🌾</h3>";
+        }
+    }, 1000);
+</script>
 
 </body>
 </html>
