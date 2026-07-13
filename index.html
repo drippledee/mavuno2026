@@ -66,8 +66,21 @@
             justify-content: center;
             text-align: center;
             padding: 100px 20px;
-            background: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
+            background: linear-gradient(135deg, #fff9e6 0%, #e8f5e9 100%);
+            background-size : 400% 400%;
+            animation : gradientMove 15s ease infinite;
         }
+        @keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
 
         .hero-content h1 {
             font-size: 3rem;
